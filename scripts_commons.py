@@ -36,6 +36,9 @@ class FileUtils(object):
         
     def get_755(self):
         return self.owner_all | self.group_no_write | self.other_no_write
+        
+    def get_644(self):
+        return self.owner_r | self.owner_w | self.group_r | self.other_r
     
 
 #

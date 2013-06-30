@@ -16,7 +16,7 @@ import argparse
 # Custom modules imports
 #
 from scripts_commons import get_conf, DEFAULT_LOCATOR_SOURCE, DEFAULT_ENC, check_os, main, writable
-        
+
 #
 # Script execution
 #

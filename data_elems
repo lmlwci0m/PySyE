@@ -1,0 +1,74 @@
+{    
+
+    "model": {
+        "table": "NAMES",
+        "columns": {
+            "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "SURNAME": "TEXT",
+            "NAME": "TEXT",
+            "BIRTHDATE": "TEXT"
+        }
+    },
+    
+    "export": {
+        "table": "NAMES",
+        "template": "export.html",
+        "columns": {
+            "SURNAME": "TEXT",
+            "NAME": "TEXT",
+            "BIRTHDATE": "TEXT"
+        }
+    }
+    ,
+    "insert": [
+    
+        {
+            "table": "NAMES",
+            "columns": {
+                "ID": null,
+                "SURNAME": "Pancaldi",
+                "NAME": "Roberto",
+                "BIRTHDATE": "28-05-80"
+            }
+        }
+        ,
+        {
+            "table": "NAMES",
+            "columns": {
+                "ID": null,
+                "SURNAME": "Savelli",
+                "NAME": "Daniela",
+                "BIRTHDATE": "08-10-83"
+            }
+        }
+        ,
+        {
+            "table": "NAMES",
+            "columns": {
+                "ID": null,
+                "SURNAME": "Pancaldi",
+                "NAME": "Alessandro",
+                "BIRTHDATE": "05-08-76"
+            }
+        }
+        
+    ]
+    
+    ,
+    
+    "update": [
+    
+        {
+            "table": "NAMES",
+            "columns": {
+                "SURNAME": "Pancaldi",
+                "NAME": "Roberto"
+            },
+            "where": {
+                "ID": 1
+            }
+        }
+    
+    ]
+    
+}

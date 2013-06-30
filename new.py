@@ -17,6 +17,7 @@ import sys
 import os
 import platform
 import argparse
+import inspect
 
 
 #
@@ -43,9 +44,7 @@ def execute(script_name, script_dir, cur_dir, paths):
     elements = {}
     
     if os.path.isfile(NEW_CONF):
-    
         elements = get_conf(NEW_CONF)
-    
     
     if len(sys.argv) < 2:
         print("{0:s}: No arguments specified".format(script_name))
@@ -63,17 +62,19 @@ def execute(script_name, script_dir, cur_dir, paths):
                         type=str)
     args = parser.parse_args()
     
-    if 'template' in elements:
-        selected_template = elements['template']
-    elif args.type:
-        selected_template = args.type
+    if 'template' in elements or args.type:
+        if args.type:
+            selected_template = args.type
+        else:
+            selected_template = elements['template']
     else:
         selected_template = temp_manager.APP
     
-    if 'locator' in elements:
-        locator_source = bytes(elements['locator'], DEFAULT_ENC)
-    elif args.locator:
-        locator_source = bytes(args.locator, DEFAULT_ENC)
+    if 'locator' in elements or args.locator:
+        if args.locator:
+            locator_source = bytes(args.locator, DEFAULT_ENC)
+        else:
+            locator_source = bytes(elements['locator'], DEFAULT_ENC)
     else:
         locator_source = DEFAULT_LOCATOR_SOURCE
     
@@ -89,9 +90,18 @@ def execute(script_name, script_dir, cur_dir, paths):
 
     with open(os.path.join(script_dir, template_path), "r") as fr:
         with open(filepath, "w") as fw:
-            fw.write(fr.read().format(do_hash(locator_source)))
         
-    os.chmod(filepath, scripts_commons.FileUtils().get_755())
+            if selected_template == temp_manager.MODULE:
+                get_conf_func = "".join(inspect.getsourcelines(get_conf)[0])
+                fw.write(fr.read().format(do_hash(locator_source), get_conf_func))
+            else:
+                fw.write(fr.read().format(do_hash(locator_source)))
+    
+    if selected_template == temp_manager.MODULE:
+        os.chmod(filepath, scripts_commons.FileUtils().get_644())
+    else:
+        os.chmod(filepath, scripts_commons.FileUtils().get_755())
+    
         
     print("Done")
 

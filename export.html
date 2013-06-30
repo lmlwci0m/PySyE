@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="${lang}">
+    <head>
+        <title>${table}</title>
+    </head>
+    <body>
+        <ul>
+            ${f(elements):element}
+        </ul>
+        <table>
+            <thead>
+                ${f(cols):cols}
+            </thead>
+            <tbody>
+                ${f(body):body}
+            </tbody>
+        </table>
+    </body>
+</html>

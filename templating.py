@@ -13,9 +13,11 @@ class TemplateManager(object):
     def __init__(self, template_location='templates'):
         self.APP = 'app'
         self.SCRIPT = 'script'
+        self.MODULE = 'module'
         self.templates = {
             self.APP: 'app_template.py',
             self.SCRIPT: 'script_template.py',
+            self.MODULE: 'module_template.py',
         }
         self.location = template_location
         

@@ -49,12 +49,25 @@ def check_file(filepath, hash_digest, pattern, full_check=True):
                 if check_ok:
                     print(filepath)
                     
+                    
+CHECK_CONF = '.check_conf'
+                    
         
 def execute(script_name, script_dir, cur_dir, paths):
+    """
+    usage: check.py path [-l locator]
+    
+    -l autowired from .check_conf
+    """
     
     if len(sys.argv) < 2:
         print("{0:s}: No arguments specified".format(script_name))
         exit(0)
+        
+    elements = {}
+    
+    if os.path.isfile(CHECK_CONF):
+        elements = get_conf(CHECK_CONF)
         
     parser = argparse.ArgumentParser()
     parser.add_argument("target", 
@@ -65,8 +78,11 @@ def execute(script_name, script_dir, cur_dir, paths):
                         type=str)
     args = parser.parse_args()
         
-    if args.locator:
-        locator_source = bytes(args.locator, DEFAULT_ENC)
+    if 'locator' in elements or args.locator:
+        if args.locator:
+            locator_source = bytes(args.locator, DEFAULT_ENC)
+        else:
+            locator_source = bytes(elements['locator'], DEFAULT_ENC)
     else:
         locator_source = DEFAULT_LOCATOR_SOURCE
         

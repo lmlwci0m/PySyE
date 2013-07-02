@@ -102,11 +102,13 @@ def show(datafile, datainfo):
         data_elems = json.load(f)
         
     c = conn.select(data_elems['model'])
-    for column in sorted(data_elems['model']['columns']):
+    #for column in sorted(data_elems['model']['columns']):
+    for column in data_elems['model']['order']:
         print("{:20}".format(column), end=" | ")
     print()
     for row in c:
-        for column in sorted(data_elems['model']['columns']):
+        #for column in sorted(data_elems['model']['columns']):
+        for column in data_elems['model']['order']:
             print("{:20}".format(row[column]), end=" | ")
         print()
         
@@ -155,9 +157,9 @@ DATA_CONF = '.data_conf'
 #
 def execute(script_name, script_dir, cur_dir, paths):
     """
-    data.py command datafile datainfo + .data_conf
-    data.py command datainfo + .data_conf
-    data.py command + .data_conf
+    usage: command [[datafile] datainfo]
+    
+    datafile and datainfo autowired from .data_conf
     """
 
     elements = {}

@@ -86,9 +86,17 @@ def is_null(element):
 def get_conf(conf):
 
     def san(splitted):
-        if splitted[-1] == '\n':
-            return splitted[:-1]
-        return splitted
+    
+        l = list(splitted)
+        if '\n' in l:
+            l.remove('\n')
+        if '\r' in l:
+            l.remove('\r')
+        return "".join(l)
+        
+        #if splitted[-1] == '\n':
+        #    return splitted[:-1]
+        #return splitted
 
     with open(conf) as f:
         elements = {line.split("=")[0]: san(line.split("=")[1])

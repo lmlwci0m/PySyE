@@ -10,5 +10,11 @@ import platform
 
 {}
 
+{}_CONF = '.{}_conf'
+
+
+elements = dict()
+if os.path.isfile({}_CONF):
+    elements = get_conf({}_CONF)
 
 pass # Execute code here

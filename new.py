@@ -33,11 +33,9 @@ NEW_CONF = '.new_conf'
         
 def execute(script_name, script_dir, cur_dir, paths):
     """
+    usage: new.py filename [-t app|script|module] [-l locator]
     
-    select locator
-    select destination
-    select type
-    
+    -t and -l autowired from .new_conf
     """
     
     temp_manager = TemplateManager()
@@ -93,7 +91,10 @@ def execute(script_name, script_dir, cur_dir, paths):
         
             if selected_template == temp_manager.MODULE:
                 get_conf_func = "".join(inspect.getsourcelines(get_conf)[0])
-                fw.write(fr.read().format(do_hash(locator_source), get_conf_func))
+                module_name = os.path.splitext(os.path.basename(filepath))[0]
+                fw.write(fr.read().format(do_hash(locator_source), get_conf_func,
+                                          module_name.upper(), module_name,
+                                          module_name.upper(), module_name.upper()))
             else:
                 fw.write(fr.read().format(do_hash(locator_source)))
     

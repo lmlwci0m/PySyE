@@ -74,8 +74,11 @@ def execute(script_name, script_dir, cur_dir, paths):
     elements = {}
     datafile = None
     defaultmodel = None
-    if os.path.isfile(DATA_CONF):
-        elements = get_conf(DATA_CONF)
+    
+    conf = os.path.join(script_dir, DATA_CONF)
+    
+    if os.path.isfile(conf):
+        elements = get_conf(conf)
         datafile = elements.get('dbname', None)
         defaultmodel = elements.get('defaultmodel', None)
 

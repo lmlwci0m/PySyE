@@ -159,9 +159,11 @@ def execute(script_name, script_dir, cur_dir, paths):
 
     if len(sys.argv) == 1:
         
-        if os.path.isfile(SYNC_CONF):
+        conf = os.path.join(script_dir, SYNC_CONF)
         
-            elements = get_conf(SYNC_CONF)
+        if os.path.isfile(conf):
+        
+            elements = get_conf(conf)
                           
             src = cur_dir
             dst = elements['sync']

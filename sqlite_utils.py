@@ -30,6 +30,8 @@ if os.path.isfile('.sqlite_conf'):
 else:
     elements = {}
     
+print(elements)
+    
 
 class SQLiteConn(object):
 

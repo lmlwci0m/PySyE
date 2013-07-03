@@ -66,8 +66,10 @@ def execute(script_name, script_dir, cur_dir, paths):
         
     elements = {}
     
-    if os.path.isfile(CHECK_CONF):
-        elements = get_conf(CHECK_CONF)
+    conf = os.path.join(script_dir, CHECK_CONF)
+    
+    if os.path.isfile(conf):
+        elements = get_conf(conf)
         
     parser = argparse.ArgumentParser()
     parser.add_argument("target", 

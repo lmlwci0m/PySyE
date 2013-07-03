@@ -41,8 +41,10 @@ def execute(script_name, script_dir, cur_dir, paths):
     temp_manager = TemplateManager()
     elements = {}
     
-    if os.path.isfile(NEW_CONF):
-        elements = get_conf(NEW_CONF)
+    conf = os.path.join(script_dir, NEW_CONF)
+    
+    if os.path.isfile(conf):
+        elements = get_conf(conf)
     
     if len(sys.argv) < 2:
         print("{0:s}: No arguments specified".format(script_name))

@@ -112,6 +112,7 @@ def main(execute, debug_mode):
 
     script_name = os.path.basename(sys.argv[0])
     script_dir = os.path.dirname(sys.argv[0])
+    
     cur_dir = os.getcwd()
     paths = os.environ['PATH'].split(os.pathsep)
     

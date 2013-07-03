@@ -163,9 +163,9 @@ class SQLiteConn(object):
     def insert(self, model, values, only_sql=False):
         
         sql = self.__generate_insert(model)
-        
+       
         if only_sql:
-            return sql
+            return sql 
             
         else:
             cvalues = values['columns']

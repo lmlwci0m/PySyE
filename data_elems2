@@ -1,0 +1,64 @@
+{    
+
+    "model": {
+        "table": "NOTES",
+        "columns": {
+            "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "DATE": "TEXT",
+            "TITLE": "TEXT",
+            "SUBJECT": "TEXT",
+            "DESCRIPTION": "TEXT",
+            "NOTES": "TEXT"
+        },
+        "order": ["DATE", "TITLE", "SUBJECT", "DESCRIPTION", "NOTES"]
+    },
+    
+    "export": {
+        "table": "NOTES",
+        "template": "export.html",
+        "columns": {
+            "DATE": "TEXT",
+            "TITLE": "TEXT",
+            "SUBJECT": "TEXT",
+            "DESCRIPTION": "TEXT",
+            "NOTES": "TEXT"
+        }
+    }
+    ,
+    "insert": [
+    
+        {
+            "table": "NOTES",
+            "columns": {
+                "ID": null,
+                "DATE": "TEXT",
+                "TITLE": "TEXT",
+                "SUBJECT": "TEXT",
+                "DESCRIPTION": "TEXT",
+                "NOTES": "TEXT"
+            }
+        }
+        
+    ]
+    
+    ,
+    
+    "update": [
+    
+        {
+            "table": "NOTES",
+            "columns": {
+                "DATE": "TEXT",
+                "TITLE": "TEXT",
+                "SUBJECT": "TEXT",
+                "DESCRIPTION": "TEXT",
+                "NOTES": "TEXT"
+            },
+            "where": {
+                "ID": 1
+            }
+        }
+    
+    ]
+    
+}

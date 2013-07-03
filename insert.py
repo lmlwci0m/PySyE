@@ -51,16 +51,15 @@ def add(datafile, datainfo):
 def insert_data(model):
     cols = {}
     
-    #for x in model['model']['order']:
-    #    if "INTEGER PRIMARY KEY" in model['model']['columns'][x]:
-    #        cols[x] = None
-    #    else:
-    #        cols[x] = input("[{}]: ".format(x))
-            
     for x in model['model']['order']:
-        cols[x] = input("[{}]: ".format(x))
+        if x == "ID" and "INTEGER PRIMARY KEY" in model['model']['columns'][x]:
+            cols[x] = None
+        elif x == "DATE":
+            cols[x] = str(now())
+        else:
+            cols[x] = input("[{}]: ".format(x))
         
-    if "ID" in model['model']['columns']:
+    if "ID" in model['model']['columns'] and "ID" not in cols:
         cols["ID"] = None
             
     return cols

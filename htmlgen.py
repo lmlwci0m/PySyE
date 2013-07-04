@@ -21,12 +21,11 @@ def get_conf(conf):
         elements = {line.split("=")[0]: san(line.split("=")[1])
                     for line in f.readlines()}
                     
-    #for x, y in elements.items():
-    #    print(x, y)
     return elements
 
 
 DEFAULT_ENCODING = "utf-8"
+DEFAULT_EXT = ".html"
 
 def iterable(obj):
     import collections
@@ -53,7 +52,7 @@ def pre_repl(self, parent, match):
         #
         # include external file: RECURSION into parent file
         #
-        filename = tag_var + ".html"
+        filename = tag_var + DEFAULT_EXT
        
         if "(" in tag_inc and ")" in tag_inc:
         

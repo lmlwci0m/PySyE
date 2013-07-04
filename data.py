@@ -24,7 +24,7 @@ class RowIterator(object):
     def __init__(self, row, data_elems):
         self.row = row
         self.data_elems = data_elems
-        self.keys = sorted(self.data_elems['export']['columns'])
+        self.keys = self.data_elems['export']['columns']
 
     def __iter__(self):
         self.index = 0
@@ -41,7 +41,7 @@ class CursorIterator(object):
     def __init__(self, cursor, data_elems):
         self.cursor = cursor
         self.data_elems = data_elems
-        self.keys = sorted(self.data_elems['export']['columns'])
+        self.keys = self.data_elems['export']['columns']
         
     def __iter__(self):
         return self
@@ -102,12 +102,12 @@ def show(datafile, datainfo):
         data_elems = json.load(f)
         
     c = conn.select(data_elems['model'])
-    #for column in sorted(data_elems['model']['columns']):
+    
     for column in data_elems['model']['order']:
         print("{:20}".format(column), end=" | ")
     print()
     for row in c:
-        #for column in sorted(data_elems['model']['columns']):
+        
         for column in data_elems['model']['order']:
             print("{:20}".format(row[column]), end=" | ")
         print()
@@ -139,7 +139,7 @@ def export(datafile, datainfo):
     htmlgen.SimpleTemplate(
         elements=['Esport table: {}'.format(data_elems['export']['table'])],
         table=data_elems['export']['table'], 
-        cols=sorted(data_elems['export']['columns']),
+        cols=data_elems['export']['columns'],
         body=CursorIterator(c, data_elems)
     ).create_page(
         data_elems['export']['template'], 

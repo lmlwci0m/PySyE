@@ -16,13 +16,7 @@
     "export": {
         "table": "NOTES",
         "template": "export.html",
-        "columns": {
-            "DATE": "TEXT",
-            "TITLE": "TEXT",
-            "SUBJECT": "TEXT",
-            "DESCRIPTION": "TEXT",
-            "NOTES": "TEXT"
-        }
+        "columns": ["DATE", "TITLE", "SUBJECT", "DESCRIPTION", "NOTES"]
     }
     ,
     "insert": [

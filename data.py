@@ -12,6 +12,7 @@ import os
 import platform
 import argparse
 import json
+from functools import partial
 
 #
 # Custom modules imports
@@ -128,7 +129,7 @@ def update(datafile, datainfo):
     conn.close()
     
     
-def export(datafile, datainfo):
+def export_base(script_dir, cur_dir, datafile, datainfo):
 
     conn = sqlite_utils.SQLiteConn(datafile)
     with open(datainfo) as f:
@@ -142,8 +143,8 @@ def export(datafile, datainfo):
         cols=data_elems['export']['columns'],
         body=CursorIterator(c, data_elems)
     ).create_page(
-        data_elems['export']['template'], 
-        '{}.html'.format(data_elems['export']['table'])
+        os.path.join(script_dir, data_elems['export']['template']), 
+        os.path.join(cur_dir, '{}.html'.format(data_elems['export']['table']))
     )
     
     c.close()
@@ -196,7 +197,6 @@ def execute(script_name, script_dir, cur_dir, paths):
     if len(sys.argv) > 3 or not datafile:
         datafile = args.datafile
         
-    
     commands = {
         'init': init,
         'add': add,
@@ -204,7 +204,7 @@ def execute(script_name, script_dir, cur_dir, paths):
         'remove': remove,
         'show': show,
         'update': update,
-        'export': export,
+        'export': partial(export_base, script_dir, cur_dir),
     }
     
     commands[args.command](datafile, defaultmodel)
